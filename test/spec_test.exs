@@ -14,7 +14,7 @@ defmodule SpecTest do
     response = HTTPoison.options!("https://bogbody.biz/")
     headers = response.headers()
     
-    methods = List.keyfind(headers, "Access-Control-Allow-Methods", 0)
-    assert methods == "GET, PUT, OPTIONS"
+    { _, methods } = List.keyfind(headers, "Access-Control-Allow-Methods", 0)
+    assert methods == "DELETE, GET, OPTIONS, PUT"
   end
 end
