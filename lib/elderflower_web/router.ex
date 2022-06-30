@@ -21,6 +21,7 @@ defmodule ElderflowerWeb.Router do
 
     scope "/" do
       pipe_through [:fetch_session, :protect_from_forgery]
+      get "/:board", ElderflowerWeb.BoardController, :show
       live_dashboard "/dashboard", metrics: ElderflowerWeb.Telemetry
     end
   end
