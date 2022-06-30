@@ -4,4 +4,8 @@ defmodule ElderflowerWeb.BoardController do
   def show(conn, _params) do
     text(conn, "")
   end
+
+  def update(conn, _params) do
+    send_resp(conn, 401, "")
+  end
 end
