@@ -20,8 +20,10 @@ defmodule ElderflowerWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
-      pipe_through [:fetch_session, :protect_from_forgery]
+      pipe_through [:fetch_session]
+      # pipe_through [:fetch_session, :protect_from_forgery]
       get "/:board", ElderflowerWeb.BoardController, :show
+      put "/:board", ElderflowerWeb.BoardController, :update
       live_dashboard "/dashboard", metrics: ElderflowerWeb.Telemetry
     end
   end
