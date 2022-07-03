@@ -3,8 +3,9 @@ defmodule Elderflower.Client do
 
    def keypair(check) do
     key_pair_list =
-      Stream.repeatedly(fn -> generate_key_pair() end)
-      |> Stream.map(fn keypair -> as_strings(keypair) end)
+      Stream.repeatedly(fn -> 0 end)
+      |> Task.async_stream(fn _ -> generate_key_pair() end)
+      |> Stream.map(fn { _ok, keypair } -> as_strings(keypair) end)
       |> Stream.filter(fn keypair -> check.(hd(keypair)) end)
       |> Enum.take(1)
       |> Enum.to_list()
