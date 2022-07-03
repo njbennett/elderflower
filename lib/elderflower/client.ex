@@ -2,21 +2,22 @@ defmodule Elderflower.Client do
    import Ed25519
 
    def keypair(check) do
-    { private_key, public_key } = generate_key_pair() |> as_strings()
+    key_pair_list =
+      Stream.repeatedly(fn -> generate_key_pair() end)
+      |> Stream.map(fn keypair -> as_strings(keypair) end)
+      |> Stream.filter(fn keypair -> check.(hd(keypair)) end)
+      |> Enum.take(1)
+      |> Enum.to_list()
 
-     if check.(private_key) do
-       { private_key, public_key }
-     else
-       keypair(check)
-     end
+     [ key_pair | _ ] = key_pair_list
+     List.to_tuple(key_pair)
    end
 
    defp as_strings(keypair) do
      keypair |>
        Tuple.to_list() |>
        Enum.map(fn(a) -> Base.encode16(a) end) |>
-       Enum.map(fn(a) -> String.downcase(a) end) |>
-       List.to_tuple()
+       Enum.map(fn(a) -> String.downcase(a) end)
    end
 
    def get(board_location) do
