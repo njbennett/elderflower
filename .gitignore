@@ -22,3 +22,5 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 elderflower-*.tar
 
+#Ignore vim swap files
+*.swp
