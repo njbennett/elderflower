@@ -34,6 +34,9 @@ defmodule Elderflower.MixProject do
   defp deps do
     [
       {:phoenix, "~> 1.6.2"},
+      {:phoenix_ecto, "~> 4.4"},
+      {:ecto_sql, "~> 3.6"},
+      {:ecto_sqlite3, ">= 0.0.0"},
       {:phoenix_live_dashboard, "~> 0.5"},
       {:swoosh, "~> 1.3"},
       {:telemetry_metrics, "~> 0.6"},
@@ -54,6 +57,10 @@ defmodule Elderflower.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
+      setup: ["deps.get", "ecto.setup"],
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
     ]
   end
 end
