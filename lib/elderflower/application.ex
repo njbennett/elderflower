@@ -8,6 +8,8 @@ defmodule Elderflower.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      # Start the Ecto repository
+      Elderflower.Repo,
       # Start the Telemetry supervisor
       ElderflowerWeb.Telemetry,
       # Start the PubSub system

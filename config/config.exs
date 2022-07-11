@@ -7,6 +7,9 @@
 # General application configuration
 import Config
 
+config :elderflower,
+  ecto_repos: [Elderflower.Repo]
+
 # Configures the endpoint
 config :elderflower, ElderflowerWeb.Endpoint,
   url: [host: "localhost"],
