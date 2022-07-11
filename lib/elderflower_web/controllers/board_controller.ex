@@ -1,8 +1,9 @@
 defmodule ElderflowerWeb.BoardController do
   use ElderflowerWeb, :controller
+  require Elderflower.Server
 
   def show(conn, _params) do
-    text(conn, "")
+    html(conn, "some board contents")
   end
 
   def update(conn, _params) do
