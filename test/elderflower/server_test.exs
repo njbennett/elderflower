@@ -20,6 +20,15 @@ defmodule Elderflower.ServerTest do
       assert Server.get_board!(board.id) == board
     end
 
+    test "get_board_by_key/1 returns the board with given id" do
+      board = board_fixture()
+      assert Server.get_board_by_key(board.key) == board
+    end
+
+    test "get_board_by_key/1 works even when the board doesn't exist" do
+      Server.get_board_by_key("some-nonexistent-key")
+    end
+
     test "create_board/1 with valid data creates a board" do
       valid_attrs = %{content: "some content", key: "some key"}
 

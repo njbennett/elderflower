@@ -1,13 +1,21 @@
 defmodule Elderflower.Server do
 
-   alias Elderflower.Repo
+   import Ecto.Query
 
+   alias Elderflower.Repo
+   alias Elderflower.Server.Board
+ 
    def update_board(post) do
      { :ok, post }
    end
 
-   def get_board(_public_key) do
-     "some board contents"
+   def get_board_by_key(key) do
+     # query = from(b in Board, where: b.key == ^key)
+     # hd(Repo.all(query))
+     boards = Repo.all(Board)
+     unless length( boards) == 0 do
+       hd(boards)
+     end
    end
 
   alias Elderflower.Server.Board
