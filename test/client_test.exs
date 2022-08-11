@@ -8,10 +8,9 @@ defmodule ClientTest do
     assert ends_with_a?.(private_key)
   end
 
-  @tag :bogbody
   test "requests a board" do
-    assert Elderflower.Client.get("https://bogbody.biz/46b8442a9e23599cb121a435216d2afb3a7748d3794201e30d601540983e0123") |>
-      String.contains?("lupus")
+    { :ok, board } = Elderflower.Client.get("http://localhost:4000/ca93846ae61903a862d44727c16fed4b80c0522cab5e5b8b54763068b83e0623")
+    assert String.contains?(board, "")
   end
 
   @tag :bogbody
