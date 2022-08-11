@@ -24,3 +24,7 @@ elderflower-*.tar
 
 #Ignore vim swap files
 *.swp
+
+#Ignore database test files
+*.db-shm
+*.db-wal
