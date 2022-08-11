@@ -1,6 +1,8 @@
 # Elderflower
 
-To start your Phoenix server:
+This is a Phoenix server that attempts to implement the [Spring83 spec](https://github.com/robinsloan/spring-83)
+
+# Getting started
 
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.setup`
@@ -8,12 +10,13 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+# Development
 
-## Learn more
+Run tests with
+```
+fswatch lib test | mix test --exclude bogbody --listen-on-stdin
+```
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+The "bogbody" tag indicates tests that target Robin Sloan's example server,
+and basically shouldn't be run
+except to check the validity of other tests.
