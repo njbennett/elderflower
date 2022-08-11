@@ -23,7 +23,7 @@ defmodule Elderflower.Client do
 
    def get(board_location) do
      %{body: body} = HTTPoison.get!(board_location)
-     body
+     { :ok, body }
    end
 
    def put(board_location, path_to_keypair, payload) do
