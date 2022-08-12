@@ -28,12 +28,16 @@ defmodule Elderflower.Client do
 
    def put(board_location, path_to_keypair, payload) do
 
-     { _, keypair } = File.read(Path.expand(path_to_keypair))
-
-     private_key = String.slice(keypair, 0..63) |> String.upcase() |> Base.decode16!()
-     public_key = String.slice(keypair, 64..128) |> String.upcase() |> Base.decode16!()
-     signature = signature(payload, private_key, public_key) |> Base.encode16() |> String.downcase()
-     headers = [{"Spring-Version", "83"}, {"Spring-Signature", signature }]
-     HTTPoison.put!(board_location, payload, headers)
+     { ok, result } = File.read(Path.expand(path_to_keypair))
+     if ok == :ok do
+       keypair = result
+       private_key = String.slice(keypair, 0..63) |> String.upcase() |> Base.decode16!()
+       public_key = String.slice(keypair, 64..128) |> String.upcase() |> Base.decode16!()
+       signature = signature(payload, private_key, public_key) |> Base.encode16() |> String.downcase()
+       headers = [{"Spring-Version", "83"}, {"Spring-Signature", signature }]
+       HTTPoison.put!(board_location, payload, headers)
+     else
+       { ok, result }
+     end
    end
 end
