@@ -35,7 +35,7 @@ defmodule Elderflower.Client do
        public_key = String.slice(keypair, 64..128) |> String.upcase() |> Base.decode16!()
        signature = signature(payload, private_key, public_key) |> Base.encode16() |> String.downcase()
        headers = [{"Spring-Version", "83"}, {"Spring-Signature", signature }]
-       HTTPoison.put!(board_location, payload, headers)
+       HTTPoison.put(board_location, payload, headers)
      else
        { ok, result }
      end
