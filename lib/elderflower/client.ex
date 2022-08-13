@@ -27,7 +27,6 @@ defmodule Elderflower.Client do
    end
 
    def put(board_location, path_to_keypair, payload) do
-
      { ok, result } = File.read(Path.expand(path_to_keypair))
      if ok == :ok do
        keypair = result
@@ -39,6 +38,13 @@ defmodule Elderflower.Client do
      else
        { ok, result }
      end
+   end
+
+   def get_keypair(filepath) do
+     { :ok, keypair } = File.read(Path.expand(filepath))
+     private_key = String.slice(keypair, 0..63)
+     public_key = String.slice(keypair, 64..128)
+     { :ok, { private_key, public_key } }
    end
 
    def put(server, secret, public, payload) do
