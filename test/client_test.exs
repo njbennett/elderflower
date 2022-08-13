@@ -28,4 +28,15 @@ defmodule ClientTest do
      { :ok, response } = Elderflower.Client.put(server, test_secret, test_board, payload)
      assert response.status_code == 401
   end
+
+  test "given a valid keypair path it returns a public and private key" do
+     test_secret = "3371f8b011f51632fea33ed0a3688c26a45498205c6097c352bd4d079d224419"
+     test_board = "ab589f4dde9fce4180fcf42c7b05185b0a02a5d682e353fa39177995083e0583"
+
+     dir = System.tmp_dir()
+     tmp_file = Path.join(dir, "test-keypair")
+     File.write!(tmp_file, "#{test_secret}#{test_board}")
+
+     assert { :ok, { test_secret, test_board } } == Elderflower.Client.get_keypair(tmp_file)
+  end
 end
