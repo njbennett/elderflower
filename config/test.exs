@@ -15,7 +15,7 @@ config :elderflower, Elderflower.Repo,
 config :elderflower, ElderflowerWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "WK6P2S9Gmx9VkSV+AcU/Wlg7qwubceVEFN8MkYweS/cI74vcI/POWdm+wzYYrjxs",
-  server: false
+  server: true
 
 # In test we don't send emails.
 config :elderflower, Elderflower.Mailer,
