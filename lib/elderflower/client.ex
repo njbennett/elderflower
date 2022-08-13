@@ -40,4 +40,11 @@ defmodule Elderflower.Client do
        { ok, result }
      end
    end
+
+   def put(server, secret, public, payload) do
+     signature = signature(payload, secret, public) |> Base.encode16() |> String.downcase()
+     headers = [{"Spring-Version", "83"}, {"Spring-Signature", signature }]
+     url = "#{server}#{public}"
+     HTTPoison.put(url, payload, headers)
+   end
 end

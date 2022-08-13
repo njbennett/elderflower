@@ -20,4 +20,12 @@ defmodule ClientTest do
     { :error, :enoent } = Elderflower.Client.put(server_path, local_path, payload)
   end
 
+  test "given a keypair and a payload, it makes a request to update the board, and returns response" do
+     server = "http://localhost:4000/"
+     secret = "3371f8b011f51632fea33ed0a3688c26a45498205c6097c352bd4d079d224419"
+     public = "ab589f4dde9fce4180fcf42c7b05185b0a02a5d682e353fa39177995083e0583"
+     payload = ""
+     { :ok, response } = Elderflower.Client.put(server, secret, public, payload)
+     assert response.status_code == 401
+  end
 end
