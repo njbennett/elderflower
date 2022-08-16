@@ -4,8 +4,8 @@ defmodule ClientTest do
 
   test "generates a keypair" do
     ends_with_a? = fn(a) -> String.match?(a, ~r/a$/) end
-    { private_key, _public_key } = Elderflower.Client.keypair(ends_with_a?)
-    assert ends_with_a?.(private_key)
+    { private_key, _public_key } = Elderflower.Client.keypair(&Elderflower.KeyCheck.test_check/1)
+    assert Elderflower.KeyCheck.test_check(private_key)
   end
 
   test "requests a board" do
