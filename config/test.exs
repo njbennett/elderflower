@@ -18,8 +18,7 @@ config :elderflower, ElderflowerWeb.Endpoint,
   server: true
 
 # In test we don't send emails.
-config :elderflower, Elderflower.Mailer,
-  adapter: Swoosh.Adapters.Test
+config :elderflower, Elderflower.Mailer, adapter: Swoosh.Adapters.Test
 
 # Print only warnings and errors during test
 config :logger, level: :warn

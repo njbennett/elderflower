@@ -3,8 +3,8 @@ defmodule ElderflowerWeb.BoardControllerTest do
 
   alias Elderflower.Server
 
-  @create_attrs %{content: "some board contents", key: "some board key" }
-  @other_create_attrs %{content: "some other board contents", key: "some board key" }
+  @create_attrs %{content: "some board contents", key: "some board key"}
+  @other_create_attrs %{content: "some other board contents", key: "some board key"}
 
   def fixture(:board) do
     {:ok, board} = Server.create_board(@create_attrs)
