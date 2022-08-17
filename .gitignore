@@ -28,3 +28,4 @@ elderflower-*.tar
 #Ignore database test files
 *.db-shm
 *.db-wal
+*.db
