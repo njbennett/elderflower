@@ -1,7 +1,9 @@
 defmodule Elderflower.Client do
   import Ed25519
 
-  def keypair(check) do
+  def keypair(check, parent) do
+    send(parent, { :key_gen, :status, "." })
+
     key_pair_list =
       Stream.repeatedly(fn -> 0 end)
       |> Task.async_stream(fn _ -> generate_key_pair() end)
@@ -9,6 +11,7 @@ defmodule Elderflower.Client do
       |> Stream.filter(fn keypair -> check.(hd(keypair)) end)
       |> Enum.take(1)
       |> Enum.to_list()
+
 
     [key_pair | _] = key_pair_list
     List.to_tuple(key_pair)

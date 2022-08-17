@@ -2,9 +2,14 @@ defmodule ClientTest do
   use ExUnit.Case, async: true
   doctest Elderflower.Client
 
-  test "generates a keypair" do
-    {private_key, _public_key} = Elderflower.Client.keypair(&Elderflower.KeyCheck.test_check/1)
-    assert Elderflower.KeyCheck.test_check(private_key)
+  describe "keypair/2" do
+    test "generates a keypair and provides status" do
+      parent = self()
+      {private_key, _public_key} = Elderflower.Client.keypair(&Elderflower.KeyCheck.test_check/1, parent)
+      assert_receive { :key_gen, :status, "." }
+
+      assert Elderflower.KeyCheck.test_check(private_key)
+    end
   end
 
   test "requests a board" do
